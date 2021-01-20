@@ -9,17 +9,19 @@ public class Laboratorio {
 	private int numeroDePublicacoes;
 	private int numeroDeOrientacoes;
 	
+	private static Laboratorio laboratorio;
 	
-	
-	public Laboratorio() {
-		colaboradores = 0;
-		projetosEmElaboracao = 0;
-		projetosEmAndamento = 0;
-		projetosConcluidos = 0;
-		numeroDeProjetos = 0;
-		numeroDePublicacoes = 0;
-		numeroDeOrientacoes = 0;
+	private Laboratorio() {
+		
 	}
+	
+	public static Laboratorio getInstance() {
+		if(laboratorio == null) {
+			laboratorio = new Laboratorio();
+		}
+		return laboratorio;
+	}
+	
 
 	public int getColaboradores() {
 		return colaboradores;

@@ -11,7 +11,7 @@ import objetos.Laboratorio;
 public class Sistema {
 	private static ArrayList <Colaboradores> colaboradores = new ArrayList<Colaboradores>();
 	private static ArrayList <Projetos> projetos = new ArrayList<Projetos>();
-	private static Laboratorio laboratorio = new Laboratorio();
+	private static Laboratorio laboratorio = Laboratorio.getInstance();
 	private static ArrayList <ProducoesAcademicas> producoes = new ArrayList<ProducoesAcademicas>();
 	
 	private static TratamentoDeErros tratamento = new TratamentoDeErros();
@@ -24,6 +24,7 @@ public class Sistema {
 	/************************** COLABORADORES **************************/
 	
 	public void addColaboradores() {
+		
 		String nome, posicao, email;
 		long cpf = 0;
 		
