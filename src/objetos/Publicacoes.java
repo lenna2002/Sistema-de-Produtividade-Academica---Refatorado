@@ -1,16 +1,23 @@
 package objetos;
 
+import java.util.Scanner;
+
+//import java.util.Scanner;
+import sistema.TratamentoDeErros;
+
 public class Publicacoes extends ProducoesAcademicas{
 	private String conferenciaDePublicacao;
 	private int mesDePublicacao;
 	private int anoDePublicacao;
 	
-	public Publicacoes(String titulo, int matricula, String conferenciaDePublicacao, int mesDePublicacao, int anoDePublicacao) {
-		this.setTitulo(titulo);
-		setProjetoAssociado(matricula);
-		this.conferenciaDePublicacao = conferenciaDePublicacao;
-		this.mesDePublicacao = mesDePublicacao;
-		this.anoDePublicacao = anoDePublicacao;
+	private static Scanner input = new Scanner(System.in);
+	
+	public Publicacoes() {
+		super.setTitulo(null);;
+		super.setProjetoAssociado(0);
+		this.conferenciaDePublicacao = null;
+		this.mesDePublicacao = 0;
+		this.anoDePublicacao = 0;
 		
 	}
 
@@ -38,5 +45,26 @@ public class Publicacoes extends ProducoesAcademicas{
 		this.anoDePublicacao = anoDePublicacao;
 	}
 	
+	public ProducoesAcademicas add(int matricula) {
+		
+		TratamentoDeErros tratamento = new TratamentoDeErros();
+		
+		ProducoesAcademicas novaProducao = new Publicacoes();
+		
+		System.out.println("Título da publicação:");
+		novaProducao.setTitulo(input.nextLine());
+		System.out.println("Conferencia de publicação:");
+		((Publicacoes)novaProducao).setConferenciaDePublicacao(input.nextLine());
+		System.out.println("Data da publicação:");
+		System.out.println("Mês:");
+		((Publicacoes)novaProducao).setMesDePublicacao(tratamento.inteiro());
+		System.out.println("Ano:");
+		((Publicacoes)novaProducao).setAnoDePublicacao(tratamento.inteiro());
+		
+		//input.close();
+				
+		return novaProducao;
+		
+	}
 		
 }

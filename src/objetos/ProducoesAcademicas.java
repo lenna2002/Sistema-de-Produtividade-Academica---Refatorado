@@ -1,6 +1,6 @@
 package objetos;
 
-public class ProducoesAcademicas {
+public abstract class ProducoesAcademicas {
 	private String titulo;
 	private int projetoAssociado;
 	
@@ -16,5 +16,7 @@ public class ProducoesAcademicas {
 	public void setProjetoAssociado(int projetoAssociado) {
 		this.projetoAssociado = projetoAssociado;
 	}
+	
+	public abstract ProducoesAcademicas add(int matricula);
 	
 }

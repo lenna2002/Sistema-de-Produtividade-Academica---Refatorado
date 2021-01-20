@@ -17,13 +17,12 @@ public class Menu {
 					+ "0 - Encerrar.\n"
 					+ "1 - Adicionar colaborador.\n" 
 					+ "2 - Adicionar projeto.\n" 
-					+ "3 - Adicionar publicacao.\n"
-					+ "4 - Adicionar orientação.\n"
-					+ "5 - Imprimir ficha de um aluno.\n" 
-					+ "6 - Adicionar colaborar em um projeto.\n"
-					+ "7 - Alterar status do projeto.\n"
-					+ "8 - Imprimir ficha do projeto.\n"
-					+ "9 - Relatório de produções acadêmicas.");
+					+ "3 - Adicionar produção acadêmica.\n"
+					+ "4 - Imprimir ficha de um aluno.\n" 
+					+ "5 - Adicionar colaborar em um projeto.\n"
+					+ "6 - Alterar status do projeto.\n"
+					+ "7 - Imprimir ficha do projeto.\n"
+					+ "8 - Relatório de produções acadêmicas.");
 			
 			opcao = input.nextInt();
 		
@@ -31,13 +30,12 @@ public class Menu {
 			case 0: 											return;
 			case 1: sistema.addColaboradores();					break;
 			case 2: sistema.addProjetos();						break;
-			case 3: sistema.addPublicacao();					break;
-			case 4: sistema.addOrientacao();					break;
-			case 5: sistema.imprimirFichaAluno();				break;
-			case 6: sistema.addColaboradorEmProjeto();			break;
-			case 7: sistema.alterarStatusDoProjeto(); 			break;
-			case 8: sistema.imprimirFichaProjeto(); 			break;
-			case 9: sistema.relatorioDeProducaoAcademica(); 	break;
+			case 3: sistema.addProducoes();						break;
+			case 4: sistema.imprimirFichaAluno();				break;
+			case 5: sistema.addColaboradorEmProjeto();			break;
+			case 6: sistema.alterarStatusDoProjeto(); 			break;
+			case 7: sistema.imprimirFichaProjeto(); 			break;
+			case 8: sistema.relatorioDeProducaoAcademica(); 	break;
 			default:
 				System.out.println("Entrada Inválida!");
 			}

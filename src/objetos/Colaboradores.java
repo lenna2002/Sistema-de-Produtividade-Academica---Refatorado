@@ -64,9 +64,9 @@ public class Colaboradores {
 	
 	public void setQuantidadeDeProjetos(boolean a) {
 		if(a) {
-			quantidadeDeProjetos ++;
+			quantidadeDeProjetos += 1;
 		} else {
-			quantidadeDeProjetos --;
+			quantidadeDeProjetos -= 1;
 		}
 	}
 

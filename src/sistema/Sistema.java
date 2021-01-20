@@ -5,8 +5,6 @@ import java.util.ArrayList;
 
 import objetos.Colaboradores;
 import objetos.ProducoesAcademicas;
-import objetos.Publicacoes;
-import objetos.Orientacoes;
 import objetos.Projetos;
 import objetos.Laboratorio;
 
@@ -58,6 +56,7 @@ public class Sistema {
 			return;
 		}
 		
+		System.out.println("CPF:");
 		cpf = tratamento.cpf();
 		for(Colaboradores c: colaboradores) {
 			if(cpf == c.getCpf()) {
@@ -95,6 +94,8 @@ public class Sistema {
 			return;
 		}
 		
+		
+		System.out.println("Digite o CPF dos colaboradores da publicação.");
 		while(cpf != -1) {
 			System.out.println("Para sair digite -1.");
 			cpf = tratamento.cpf();
@@ -238,14 +239,12 @@ public class Sistema {
 		anoTermino = tratamento.inteiro();
 		
 		System.out.println("Agência Financiadora do projeto:");
-		input.nextLine();
 		agencia = input.nextLine();
 		
 		System.out.println("Valor financeiro do projeto:");
 		valor = tratamento.doubl();
 		
 		System.out.println("Objetivo do projeto:");
-		input.nextLine();
 		objetivo = input.nextLine();
 		
 		System.out.println("Descrição do projeto:");
@@ -262,7 +261,7 @@ public class Sistema {
 					c.setQuantidadeDeProjetos(true);
 					c.addProjeto(ultimaMatricula);
 					System.out.println(ultimaMatricula);
-					return;
+					break;
 				}
 			}	
 		}	
@@ -446,9 +445,8 @@ public class Sistema {
 	
 	/************************** PRODUÇÕES **************************/
 	
-	public void addPublicacao() {
-		int matricula, mesDePublicacao, anoDePublicacao;
-		String titulo, conferencia;
+	public void addProducoes() {
+		int matricula, opcao;
 		
 		if(projetosVazio()) {
 			System.out.println("Sem projetos cadastrados.");
@@ -463,71 +461,32 @@ public class Sistema {
 					System.out.println("Essa opereção é permitida apenas quando o projeto está em andamento. Operação cancelada!");
 					return;
 				}
-				System.out.println("Título da publicação:");
-				titulo = input.nextLine();
-				System.out.println("Conferencia de publicação:");
-				conferencia = input.nextLine();
-				System.out.println("Data da publicação:");
-				System.out.println("Mês:");
-				mesDePublicacao = tratamento.inteiro();
-				System.out.println("Ano:");
-				anoDePublicacao = tratamento.inteiro();
 				
-				Publicacoes novaProducao = new Publicacoes(titulo, matricula, conferencia, 
-						mesDePublicacao, anoDePublicacao);
+				ProducoesAcademicas novaProducao;
+				
+				System.out.println("A produção acadêmica é uma (1) publicação ou um (2) orientação?");
+				opcao = tratamento.inteiro();
+				
+				if(opcao == 1) {
+					novaProducao = ProducoesFactory.qualProducao(true, matricula);
+					//novaProducao = ((Publicacoes)novaProducao).add(matricula);
+				} else {
+					novaProducao = ProducoesFactory.qualProducao(false, matricula);
+					//novaProducao = ((Orientacoes)novaProducao).add(matricula);
+				}
+				
+				
+				laboratorio.setNumeroDePublicacoes();
+				atribuirPublicacaoColaborador(novaProducao.getTitulo());
+				atribuirPublicacaoProjeto(novaProducao.getTitulo(), c);
 				
 				producoes.add(novaProducao);
-				
-				atribuirPublicacaoColaborador(titulo);
-				atribuirPublicacaoProjeto(titulo, c);
-				laboratorio.setNumeroDePublicacoes();
 				
 				return;
 			}
 		}
-		
-		
-		
 	}
 	
-	public void addOrientacao() {
-		int matricula;
-		long cpf;
-		String titulo;
-		
-		if(projetosVazio()) {
-			System.out.println("Sem projetos cadastrados.");
-			return;
-		}
-		
-		System.out.println("Qual a matricula do projeto associado?");
-		matricula = tratamento.inteiro();
-		for(Projetos c: projetos) {
-			if(c.getMatricula() == matricula) {
-				if(!c.getStatus().equalsIgnoreCase("andamento")) {
-					System.out.println("Essa opereção é permitida apenas quando o projeto está em andamento. Operação cancelada!");
-					return;
-				}
-				System.out.println("Título da publicação:");
-				titulo = input.nextLine();
-				System.out.println("CPF do professor responsavel.");
-				cpf = tratamento.cpf();
-				atribuirProfessorResponsavel(cpf, titulo);
-				
-				Orientacoes novaOrientacao = new Orientacoes(titulo, matricula, cpf);
-				
-				producoes.add(novaOrientacao);
-				
-				atribuirOrientacaoColaborador(titulo);
-				atribuirOrientacaoProjeto(titulo, c);
-				laboratorio.setNumeroDeOrientacoes();
-				
-			}
-		}
-		
-		
-		
-	}
 	
 	public boolean checarProducoes(Projetos p) {
 		String publicacoes[] = p.getPublicacoes();
